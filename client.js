@@ -1,3 +1,5 @@
+$( document ).ready(readyNow);
+
 const employees = [
   {
     name: 'Atticus',
@@ -48,8 +50,8 @@ function evaluateEmployee (employee){
   let bonusPotential = {
     name: employee.name,
     bonusPercentage: bonusPercent,
-    totalCompensation: employee.annualSalary * (1 + bonus/100),
-    totalBonus: Math.round(employee.annualSalary * (bonus/100))
+    totalCompensation: employee.annualSalary * (1 + bonusPercent/100),
+    totalBonus: Math.round(employee.annualSalary * (bonusPercent/100))
   }//end object
   return bonusPotential;
 }//end function
@@ -84,8 +86,18 @@ function bonusCalculator(rating, employeeNumber, salary){
   }//end else
 }//end function
 
-for ( let employee of employees){
-  console.log(evaluateEmployee(employee));
-}//end for loop
+function displayEmployees(){
+  let el = $( "#employeeDetails");
+  el.empty();
+  for ( let employee of employees){
+    let evaluatedEmployee = evaluateEmployee(employee);
+    console.log(evaluatedEmployee);
+    el.append (`<li>name: ${evaluatedEmployee.name}, Bonus Percentage: ${evaluatedEmployee.bonusPercentage},` + 
+    ` Total Compensation: ${evaluatedEmployee.totalCompensation}, Total Bonus: ${evaluatedEmployee.totalBonus}</li>`);
+  }//end for loop
+}//end of function
 
-
+function readyNow() {
+  //when users click button, run displayEmployees
+  $( "#showEmployeeDetails" ).on( "click", displayEmployees );
+} //end readyNow
