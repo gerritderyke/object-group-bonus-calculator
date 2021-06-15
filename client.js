@@ -50,21 +50,44 @@ function evaluateEmployee (employee){
     totalCompensation: employee.annualSalary * (1 + bonus/100),
     totalBonus: Math.round(employee.annualSalary * (bonus/100))
   }
+  return bonusPotential;
 }
 
 function bonusCalculator(rating, employeeNumber, salary){
   const oldTimerBonus = (employeeNumber.length == 4) ? 5 : 0;
-  const richPersonAntiBonus = ;
+  const richPersonAntiBonus = (salary > 65000) ? -1 : 0;
   if (rating <= 2){
-    return 0 + oldTimerBonus;
+    if (0 + oldTimerBonus + richPersonAntiBonus < 0) {
+      return 0;
+    }
+    else{ 
+      return 0 + oldTimerBonus + richPersonAntiBonus;
+    }
   }
   else if (rating <= 3){
-    return 4 + oldTimerBonus;
+    return 4 + oldTimerBonus + richPersonAntiBonus;
   }
   else if (rating <= 4){
-    return 6 + oldTimerBonus;
+    return 6 + oldTimerBonus + richPersonAntiBonus;
   }
   else {
-    return 10;
+    if (10 + oldTimerBonus + richPersonAntiBonus > 13) {
+      return 13;
+    }
+    else {
+      return 10 + oldTimerBonus + richPersonAntiBonus;
+    }
   }
 }
+
+for ( let employee of employees){
+  console.log(evaluateEmployee(employee));
+}
+
+// ## Processing Employee Bonuses
+
+// Loop over the `employees` array and do the following:
+
+// * use each employee object as the input to the function described below.
+// * `console.log` the results of each iteration.
+
