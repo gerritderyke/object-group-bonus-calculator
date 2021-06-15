@@ -43,27 +43,31 @@ const employees = [
 console.log( employees );
 
 function evaluateEmployee (employee){
-  let bonus = bonusCalculator(employee.reviewRating, employee.employeeNumber, employee.annualSalary);
+  // calculate bonus percentage based on employee rating, number, and salary
+  let bonusPercent = bonusCalculator(employee.reviewRating, employee.employeeNumber, employee.annualSalary);
   let bonusPotential = {
     name: employee.name,
-    bonusPercentage: bonus,
+    bonusPercentage: bonusPercent,
     totalCompensation: employee.annualSalary * (1 + bonus/100),
     totalBonus: Math.round(employee.annualSalary * (bonus/100))
-  }
+  }//end object
   return bonusPotential;
-}
+}//end function
 
 function bonusCalculator(rating, employeeNumber, salary){
+  // if employee number is 4 digits long, they've been with company more
+  // than 15 years and get a 5% bonus
   const oldTimerBonus = (employeeNumber.length == 4) ? 5 : 0;
+  // if employee gets more than 65000 per year, adjust bonus down 1%
   const richPersonAntiBonus = (salary > 65000) ? -1 : 0;
   if (rating <= 2){
     if (0 + oldTimerBonus + richPersonAntiBonus < 0) {
-      return 0;
+      return 0; // no bonus can be below 0%
     }
     else{ 
       return 0 + oldTimerBonus + richPersonAntiBonus;
     }
-  }
+  }//end if
   else if (rating <= 3){
     return 4 + oldTimerBonus + richPersonAntiBonus;
   }
@@ -72,22 +76,16 @@ function bonusCalculator(rating, employeeNumber, salary){
   }
   else {
     if (10 + oldTimerBonus + richPersonAntiBonus > 13) {
-      return 13;
+      return 13; // no bonus can be above 13%
     }
     else {
       return 10 + oldTimerBonus + richPersonAntiBonus;
     }
-  }
-}
+  }//end else
+}//end function
 
 for ( let employee of employees){
   console.log(evaluateEmployee(employee));
-}
+}//end for loop
 
-// ## Processing Employee Bonuses
-
-// Loop over the `employees` array and do the following:
-
-// * use each employee object as the input to the function described below.
-// * `console.log` the results of each iteration.
 
