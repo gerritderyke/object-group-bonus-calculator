@@ -31,7 +31,7 @@ const employees = [
   }
 ];
 
-// YOU SHOULD NOT NEED TO CHANGE ANYTHING ABOVE THIS POINT
+// YOU SHOULD NOT NEED TO CHANGE ANYTHING ABOVE THIS POINT 
 
 // Take small steps! Don't write a for loop and two functions that do all of the calculations right away.
 // This problem is massive! Break the problem down. Use the debugger.
@@ -41,3 +41,30 @@ const employees = [
 // Ask questions when you don't.
 
 console.log( employees );
+
+function evaluateEmployee (employee){
+  let bonus = bonusCalculator(employee.reviewRating, employee.employeeNumber, employee.annualSalary);
+  let bonusPotential = {
+    name: employee.name,
+    bonusPercentage: bonus,
+    totalCompensation: employee.annualSalary * (1 + bonus/100),
+    totalBonus: Math.round(employee.annualSalary * (bonus/100))
+  }
+}
+
+function bonusCalculator(rating, employeeNumber, salary){
+  const oldTimerBonus = (employeeNumber.length == 4) ? 5 : 0;
+  const richPersonAntiBonus = ;
+  if (rating <= 2){
+    return 0 + oldTimerBonus;
+  }
+  else if (rating <= 3){
+    return 4 + oldTimerBonus;
+  }
+  else if (rating <= 4){
+    return 6 + oldTimerBonus;
+  }
+  else {
+    return 10;
+  }
+}
